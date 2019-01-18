@@ -1,1 +1,1 @@
-# Textadventure von Burgert und Stelly
+# Textadventure von Burgert und Stellmacher
