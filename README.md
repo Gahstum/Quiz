@@ -1,1 +1,1 @@
-# Textadventure von Burgert und Stellmacher
+# Quiz  von Burgert (Gahstum) und Stellmacher
