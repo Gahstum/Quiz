@@ -6,7 +6,7 @@ public class Quiz
     private Scanner scanner = new Scanner(System.in);
     private String userName, userAnswer;
     private Question[] questions = {new Question("Question", "Answer")};
-
+    private String questionsRecap = "";
 
     //Greetings and such formal stuff not the actual Quiz
     public void start()
@@ -21,27 +21,30 @@ public class Quiz
     }
 
     // the actual Quiz
-    public void startQuiz()
+    private void startQuiz()
     {
         //ask questions and stuff here
         System.out.println("Good luck and here comes your first question: ");
         for (int i = 0; i < questions.length; i++)
         {
             System.out.println(questions[i].getQuestion());
-            if (questions[i].getAnswer().equalsIgnoreCase(scanner.next()))
+            String answerString = scanner.next();
+            if (questions[i].getAnswer().equalsIgnoreCase(answerString))
             {
-                //TODO do something if answer is right
+                questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questions[i].getQuestion() + " and your answer: " + answerString + " was correct!" + "\n";
                 System.out.println("Right!");
             } else
             {
-                //Todo do something if answer if wrong
+                questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questions[i].getQuestion() +
+                        " and your answer: " + answerString + " was incorrect. The answer is " + questions[i].getAnswer();
                 System.out.println("Wrong!");
             }
         }
+        System.out.println(questionsRecap);
     }
 
     //check if the Input was yes or no to start or end the quiz.
-    public void checkYesNo(String input)
+    private void checkYesNo(String input)
     {
 
         while (input.isBlank())
