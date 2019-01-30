@@ -1,0 +1,5 @@
+§WWW stands for ? #World Wide Web
+$Where is RAM located ? #Mother Board
+$If a computer has more than one processor then it is known as ? #Multiprocessor
+$If a computer provides database services to other, then it will be known as ? #Database server
+$Full form of URL is ? #Uniform Resource Locator
