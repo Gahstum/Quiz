@@ -21,8 +21,10 @@ public class Quiz
         System.out.println("Nice to meet you " + userName + ". \n" +
                 "Do you want to participate in a Quiz?");
         userAnswer = scanner.nextLine();
-        checkYesNo(userAnswer);
-
+        if ( checkYesNo(userAnswer) == true)
+        {
+            checkThema();
+        }
     }
 
     // the actual Quiz
@@ -56,7 +58,7 @@ public class Quiz
         System.out.println("Do you want a specific topic?");
         System.out.println("Type 'yes' to continue or 'no' to  for all topics.");
         userAnswer = scanner.nextLine();
-        if (userAnswer.equalsIgnoreCase("yes"))
+        if (checkYesNo(userAnswer) == true)
         {
             System.out.println("What Topic do you want: Themen-listen");
             userAnswer = scanner.nextLine();
@@ -71,7 +73,7 @@ public class Quiz
                     break;
                 }
             }
-        } else
+        } else if (checkYesNo(userAnswer) == false)
         {
             //fügt alle Themen zu den Fragen hinzu
             for (int i = 0; i < topics.length; i++)
@@ -91,20 +93,22 @@ public class Quiz
     }
 
     //check if the Input was yes or no to start or end the quiz.
-    private void checkYesNo(String input)
+    private Boolean checkYesNo(String input)
     {
-        while (input.isBlank())
+        Boolean yes = false;
+        if (input.equalsIgnoreCase("yes"))
         {
-            System.out.println("Type 'yes' to continue or 'no' to leave.");
+            yes = true;
+        } else if (input.equalsIgnoreCase("no"))
+        {
+            yes = false;
+        } else
+        {
+            System.out.println("Type 'yes' to continue or 'no'.");
             userAnswer = scanner.nextLine();
             checkYesNo(userAnswer);
         }
-        if (input.equalsIgnoreCase("yes"))
-        {
-            checkThema();
-        } else
-        {
-            System.out.println("Goodbye " + userName + " see you soon.");
-        }
+        return yes;
     }
 }
+
