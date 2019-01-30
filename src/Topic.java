@@ -1,7 +1,9 @@
+import java.io.*;
+
 public class Topic
 {
     private String topic;
-    private Question[] questions = {new Question("frage","antwort")};
+    private Question[] questions = {new Question("question","answer")};
 
     public Topic(String themenname)
     {
@@ -26,5 +28,20 @@ public class Topic
     public void setTopic(String thema)
     {
         topic = thema;
+    }
+
+    public void readQuestionFromFile(String filename) throws IOException
+    {
+        FileReader fr = new FileReader(filename);
+        BufferedReader br = new BufferedReader(fr);
+
+        String zeile = "";
+
+        while( (zeile = br.readLine()) != null )
+        {
+            System.out.println(zeile);
+        }
+
+        br.close();
     }
 }

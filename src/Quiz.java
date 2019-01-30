@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Quiz
     private String questionsRecap = "";
 
     //Greetings and such formal stuff not the actual Quiz
-    public void start()
+    public void start() throws IOException
     {
         filesFromDirectory();
         System.out.println("Hello what is your name?");
@@ -56,6 +57,7 @@ public class Quiz
     //fügt ein oder alle Themen den Fragen hinzu
     private void checkThema()
     {
+
         System.out.println("Do you want a specific topic?");
         System.out.println("Type 'yes' to continue or 'no' to  for all topics.");
         userAnswer = scanner.nextLine();
@@ -109,14 +111,14 @@ public class Quiz
             yes = false;
         } else
         {
-            System.out.println("Type 'yes' to continue or 'no'.");
+            System.out.println("Type 'yes' or 'no'.");
             userAnswer = scanner.nextLine();
             checkYesNo(userAnswer);
         }
         return yes;
     }
 
-    private void filesFromDirectory()
+    private void filesFromDirectory() throws IOException
     {
         File folder = new File("./Topics");
         File[] listOfFiles = folder.listFiles();
@@ -124,6 +126,11 @@ public class Quiz
         {
             topics.add(new Topic(listOfFiles[i].getName()));
         }
+        for (Topic item:topics)
+        {
+            item.readQuestionFromFile("./Topics/" + item.getTopic());
+        }
+
     }
 }
 
