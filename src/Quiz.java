@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,20 +9,20 @@ public class Quiz
 
     private Scanner scanner = new Scanner(System.in);
     private String userName, userAnswer;
-    //private Question[] questions;
     private List<Question> questions = new ArrayList<Question>();
-    private Topic[] topics = {new Topic("Mathe")};
+    private List<Topic> topics = new ArrayList<Topic>();
     private String questionsRecap = "";
 
     //Greetings and such formal stuff not the actual Quiz
     public void start()
     {
+        filesFromDirectory();
         System.out.println("Hello what is your name?");
         userName = scanner.nextLine();
         System.out.println("Nice to meet you " + userName + ". \n" +
                 "Do you want to participate in a Quiz?");
         userAnswer = scanner.nextLine();
-        if ( checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer) == true)
         {
             checkThema();
         }
@@ -60,15 +61,19 @@ public class Quiz
         userAnswer = scanner.nextLine();
         if (checkYesNo(userAnswer) == true)
         {
-            System.out.println("What Topic do you want: Themen-listen");
+            System.out.printf("What Topic do you want: ");
+            for (Topic item : topics)
+            {
+                System.out.printf(item.getTopic() + " ");
+            }
             userAnswer = scanner.nextLine();
-            for (int i = 0; i < topics.length; i++)
+            for (Topic item : topics)
             {
                 //fügt das bestimte Thema zu den Fragen hinzu
-                if (userAnswer.equalsIgnoreCase(topics[i].getTopic()))
+                if (userAnswer.equalsIgnoreCase(item.getTopic()))
                 {
                     questions.clear();
-                    questions.addAll(Arrays.asList(topics[i].getQuestions()));
+                    questions.addAll(Arrays.asList(item.getQuestions()));
                     startQuiz();
                     break;
                 }
@@ -76,12 +81,12 @@ public class Quiz
         } else if (checkYesNo(userAnswer) == false)
         {
             //fügt alle Themen zu den Fragen hinzu
-            for (int i = 0; i < topics.length; i++)
+            for (Topic item : topics)
             {
                 questions.clear();
                 try
                 {
-                    questions.addAll(Arrays.asList(topics[i].getQuestions()));
+                    questions.addAll(Arrays.asList(item.getQuestions()));
                 } catch (Exception e)
                 {
                     System.out.println("Error: No topcis found");
@@ -109,6 +114,16 @@ public class Quiz
             checkYesNo(userAnswer);
         }
         return yes;
+    }
+
+    private void filesFromDirectory()
+    {
+        File folder = new File("./Topics");
+        File[] listOfFiles = folder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++)
+        {
+            topics.add(new Topic(listOfFiles[i].getName()));
+        }
     }
 }
 
