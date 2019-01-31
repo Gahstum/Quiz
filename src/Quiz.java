@@ -38,7 +38,7 @@ public class Quiz
         for (Question questionItem : questions)
         {
             System.out.println(questionItem.getQuestion());
-            String answerString = scanner.next();
+            String answerString = scanner.nextLine();
             if (questionItem.getAnswer().equalsIgnoreCase(answerString))
             {
                 questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questionItem.getQuestion() + " and your answer: " + answerString + " was correct!" + "\n";
@@ -75,7 +75,7 @@ public class Quiz
                 if (userAnswer.equalsIgnoreCase(item.getTopic()))
                 {
                     questions.clear();
-                    questions.addAll(Arrays.asList(item.getQuestions()));
+                    questions.addAll(item.getQuestions());
                     startQuiz();
                     break;
                 }
@@ -88,7 +88,7 @@ public class Quiz
                 questions.clear();
                 try
                 {
-                    questions.addAll(Arrays.asList(item.getQuestions()));
+                    questions.addAll(item.getQuestions());
                 } catch (Exception e)
                 {
                     System.out.println("Error: No topcis found");

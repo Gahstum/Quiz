@@ -1,21 +1,23 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Topic
 {
     private String topic;
-    private Question[] questions = {new Question("question","answer")};
+    private List<Question> questions = new ArrayList<Question>();
 
     public Topic(String themenname)
     {
         topic = themenname;
     }
 
-    public Question[] getQuestions()
+    public List<Question> getQuestions()
     {
         return questions;
     }
 
-    public void setQuestions(Question[] questions)
+    public void setQuestions(List<Question> questions)
     {
         this.questions = questions;
     }
@@ -39,7 +41,14 @@ public class Topic
 
         while( (zeile = br.readLine()) != null )
         {
-            System.out.println(zeile);
+            String question;
+            String answer;
+            //split questions and answers and add them into their fitting array
+            question = zeile.split("#")[0];
+            answer = zeile.split("#")[1];
+            //what?
+
+            questions.add(new Question(question,answer));
         }
 
         br.close();
