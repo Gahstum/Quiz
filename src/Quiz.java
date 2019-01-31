@@ -1,9 +1,6 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Quiz
 {
@@ -46,7 +43,7 @@ public class Quiz
             } else
             {
                 questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questionItem.getQuestion() +
-                        " and your answer: " + answerString + " was incorrect. The answer is " + questionItem.getAnswer();
+                        " and your answer: " + answerString + " was incorrect. The answer is " + questionItem.getAnswer() + "\n";
                 System.out.println("Wrong!");
             }
             i++;
@@ -76,6 +73,7 @@ public class Quiz
                 {
                     questions.clear();
                     questions.addAll(item.getQuestions());
+                    shuffleQuestions();
                     startQuiz();
                     break;
                 }
@@ -83,9 +81,9 @@ public class Quiz
         } else if (checkYesNo(userAnswer) == false)
         {
             //fügt alle Themen zu den Fragen hinzu
+            questions.clear();
             for (Topic item : topics)
             {
-                questions.clear();
                 try
                 {
                     questions.addAll(item.getQuestions());
@@ -95,6 +93,7 @@ public class Quiz
                 }
 
             }
+            shuffleQuestions();
             startQuiz();
         }
     }
@@ -131,6 +130,11 @@ public class Quiz
             item.readQuestionFromFile("./Topics/" + item.getTopic());
         }
 
+    }
+
+    private void shuffleQuestions()
+    {
+       Collections.shuffle(questions);
     }
 }
 
