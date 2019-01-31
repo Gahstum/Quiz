@@ -46,8 +46,6 @@ public class Topic
             //split questions and answers and add them into their fitting array
             question = zeile.split("#")[0];
             answer = zeile.split("#")[1];
-            //what?
-
             questions.add(new Question(question,answer));
         }
 
