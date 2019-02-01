@@ -49,6 +49,14 @@ public class Quiz
             i++;
         }
         System.out.println(questionsRecap);
+        System.out.println("Do you want to do it again?");
+        if ( checkYesNo(scanner.nextLine()) == true)
+        {
+            startQuiz();
+        } else
+        {
+            System.out.println("Goodbye " + userName);
+        }
     }
 
     //fügt ein oder alle Themen den Fragen hinzu
