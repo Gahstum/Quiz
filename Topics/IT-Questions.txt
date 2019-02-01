@@ -1,5 +1,10 @@
-WWW stands for ? #World Wide Web
+WWW is short for ? #World Wide Web
 Where is RAM located ? #Mother Board
 If a computer has more than one processor then it is known as ? #Multiprocessor
-If a computer provides database services to other, then it will be known as ? #Database server
+If a computer provides database services to others, then it will be known as ? #Database server
 Full form of URL is ? #Uniform Resource Locator
+ROM is short for? #Read Only Memory
+RAM is short for? #Random Access Memory
+Who is the founder of linux? #Linus Torvalds
+Who is the founder of Microsoft? #Bill Gates
+Who is the founder of Microsoft? #Jeff Bezos

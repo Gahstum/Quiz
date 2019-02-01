@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Quiz
@@ -30,10 +31,34 @@ public class Quiz
     private void startQuiz()
     {
         //ask questions and stuff here
+        int numberOfQuestions = 0;
+        System.out.println("How many Questions do you want?");
+        while (numberOfQuestions <= 0)
+        {
+            try
+            {
+                Scanner scannerInt = new Scanner(System.in);
+                numberOfQuestions = scannerInt.nextInt();
+                if (numberOfQuestions > questions.size())
+                {
+                    System.out.println("We dont have that many questions. We only got " + questions.size() + " questions."
+                            + "\n" + "Pls enter a lower number");
+                    numberOfQuestions = 0;
+                }
+            } catch (Exception e)
+            {
+                System.out.println("Please enter a number above 0.");
+            }
+        }
+
         System.out.println("Good luck and here comes your first question: ");
         int i = 0;
         for (Question questionItem : questions)
         {
+            if (i == numberOfQuestions)
+            {
+                break;
+            }
             System.out.println(questionItem.getQuestion());
             String answerString = scanner.nextLine();
             if (questionItem.getAnswer().equalsIgnoreCase(answerString))
@@ -47,6 +72,7 @@ public class Quiz
                 System.out.println("Wrong!");
             }
             i++;
+
         }
         System.out.println(questionsRecap);
         System.out.println("Do you want to do it again?");
@@ -133,7 +159,7 @@ public class Quiz
         {
             topics.add(new Topic(listOfFiles[i].getName()));
         }
-        for (Topic item:topics)
+        for (Topic item : topics)
         {
             item.readQuestionFromFile("./Topics/" + item.getTopic());
         }
@@ -142,7 +168,7 @@ public class Quiz
 
     private void shuffleQuestions()
     {
-       Collections.shuffle(questions);
+        Collections.shuffle(questions);
     }
 }
 
