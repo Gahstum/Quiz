@@ -1,1 +1,1 @@
-# Quiz  von Burgert (Gahstum) und Stellmacher (Xarloran)
+# Quiz  von Burgert (Gahstum) und Stellmacher (Xarloran / Stelly)
