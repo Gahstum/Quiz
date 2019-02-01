@@ -75,6 +75,11 @@ public class Quiz
 
         }
         System.out.println(questionsRecap);
+        System.out.println("Do you want to add a question?");
+        if ( checkYesNo(scanner.nextLine()) == true)
+        {
+            addQuestion();
+        }
         System.out.println("Do you want to do it again?");
         if ( checkYesNo(scanner.nextLine()) == true)
         {
@@ -94,12 +99,13 @@ public class Quiz
         userAnswer = scanner.nextLine();
         if (checkYesNo(userAnswer) == true)
         {
-            System.out.printf("What Topic do you want: ");
+            System.out.printf("What Topic do you want: \n");
             for (Topic item : topics)
             {
-                System.out.printf(item.getTopic() + " ");
+                System.out.printf(item.getTopic().split("-")[0] + "\n");
             }
             userAnswer = scanner.nextLine();
+            userAnswer = userAnswer + "-Questions.txt";
             for (Topic item : topics)
             {
                 //fügt das bestimte Thema zu den Fragen hinzu
@@ -169,6 +175,37 @@ public class Quiz
     private void shuffleQuestions()
     {
         Collections.shuffle(questions);
+    }
+
+    private void addQuestion()
+    {
+        String selectedTopic,newTopic,newQestion,newAnswer;
+
+        File folder = new File("./Topics");
+        File[] listOfFiles = folder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++)
+        {
+            String topic = listOfFiles[i].getName().split("-")[0];
+            System.out.println(topic);
+        }
+        System.out.println("Do you want to add to the listed topics? ( Yes or no )");
+        userAnswer = scanner.nextLine();
+        if ( checkYesNo(userAnswer) == true)
+        {
+            System.out.println("Please enter the topic you would like to add to.");
+            selectedTopic = scanner.nextLine() + "-Questions.txt";
+        } else if ( checkYesNo(userAnswer) == false)
+        {
+            System.out.println("Please enter a new topic name.");
+            newTopic = scanner.nextLine() + "-Questions.txt";
+        }
+        System.out.println("Please enter your question");
+        newQestion = scanner.nextLine();
+        System.out.println("Please enter the answer to that question");
+        newAnswer = scanner.nextLine();
+
+        //TODO: add new topic if needed, then add the question and answer into the fitting file.
+
     }
 }
 
