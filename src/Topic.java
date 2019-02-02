@@ -39,7 +39,7 @@ public class Topic
 
         String zeile = "";
 
-        while( (zeile = br.readLine()) != null )
+        while((zeile = br.readLine()) != null )
         {
             String question;
             String answer;

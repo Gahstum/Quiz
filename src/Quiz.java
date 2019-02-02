@@ -23,7 +23,7 @@ public class Quiz
         userAnswer = scanner.nextLine();
         if (checkYesNo(userAnswer) == true)
         {
-            checkThema();
+            checkTopic();
         }
     }
 
@@ -76,12 +76,12 @@ public class Quiz
         }
         System.out.println(questionsRecap);
         System.out.println("Do you want to add a question?");
-        if ( checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()) == true)
         {
             addQuestion();
         }
         System.out.println("Do you want to do it again?");
-        if ( checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()) == true)
         {
             startQuiz();
         } else
@@ -91,7 +91,7 @@ public class Quiz
     }
 
     //fügt ein oder alle Themen den Fragen hinzu
-    private void checkThema()
+    private void checkTopic()
     {
 
         System.out.println("Do you want a specific topic?");
@@ -190,11 +190,11 @@ public class Quiz
         }
         System.out.println("Do you want to add to the listed topics? ( Yes or no )");
         userAnswer = scanner.nextLine();
-        if ( checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer) == true)
         {
             System.out.println("Please enter the topic you would like to add to.");
             selectedTopic = scanner.nextLine() + "-Questions.txt";
-        } else if ( checkYesNo(userAnswer) == false)
+        } else if (checkYesNo(userAnswer) == false)
         {
             System.out.println("Please enter a new topic name.");
             newTopic = scanner.nextLine() + "-Questions.txt";
