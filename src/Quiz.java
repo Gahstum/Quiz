@@ -162,6 +162,7 @@ public class Quiz
     {
         File folder = new File("./Topics");
         File[] listOfFiles = folder.listFiles();
+        topics.clear();
         for (int i = 0; i < listOfFiles.length; i++)
         {
             topics.add(new Topic(listOfFiles[i].getName()));
@@ -227,6 +228,13 @@ public class Quiz
         if (checkYesNo(scanner.nextLine()) == true)
         {
             addQuestion();
+        }
+        try
+        {
+            filesFromDirectory();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 }
