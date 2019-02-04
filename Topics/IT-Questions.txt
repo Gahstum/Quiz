@@ -7,4 +7,4 @@ ROM is short for? #Read Only Memory
 RAM is short for? #Random Access Memory
 Who is the founder of linux? #Linus Torvalds
 Who is the founder of Microsoft? #Bill Gates
-Who is the founder of Microsoft? #Jeff Bezos
+Who is the founder of Amazon? #Jeff Bezos

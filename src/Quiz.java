@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.*;
@@ -80,7 +81,7 @@ public class Quiz
         {
             addQuestion();
         }
-        System.out.println("Do you want to do it again?");
+        System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()) == true)
         {
             startQuiz();
@@ -179,7 +180,7 @@ public class Quiz
 
     private void addQuestion()
     {
-        String selectedTopic,newTopic,newQestion,newAnswer;
+        String selectedTopic = "", newTopic = "", newQestion, newAnswer;
 
         File folder = new File("./Topics");
         File[] listOfFiles = folder.listFiles();
@@ -204,8 +205,29 @@ public class Quiz
         System.out.println("Please enter the answer to that question");
         newAnswer = scanner.nextLine();
 
-        //TODO: add new topic if needed, then add the question and answer into the fitting file.
-
+        try
+        {
+            if (!newTopic.isEmpty() == true)
+            {
+                FileWriter writer = new FileWriter(new File("./Topics" + "/" + newTopic), true);
+                writer.write(newQestion + " # " + newAnswer);
+                writer.close();
+            } else if (!selectedTopic.isEmpty() == true)
+            {
+                FileWriter writer = new FileWriter(new File("./Topics" + "/" + selectedTopic), true);
+                writer.write("\n" + newQestion + " # " + newAnswer);
+                writer.close();
+            }
+        } catch (IOException e)
+        {
+            System.out.println("Error while trying to add a question");
+            e.printStackTrace();
+        }
+        System.out.println("Do you want to add another question?");
+        if (checkYesNo(scanner.nextLine()) == true)
+        {
+            addQuestion();
+        }
     }
 }
 
