@@ -1,6 +1,5 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -16,6 +15,7 @@ public class Quiz
     //Greetings and such formal stuff not the actual Quiz
     public void start() throws IOException
     {
+
         filesFromDirectory();
         System.out.println("Hello what is your name?");
         userName = scanner.nextLine();
@@ -235,6 +235,25 @@ public class Quiz
         } catch (IOException e)
         {
             e.printStackTrace();
+        }
+    }
+
+    public void WolframAlpha() throws IOException
+    {
+        // TODO parameter für string eingeben und den string dann mit + verbinden und in URL schreiben
+        try
+        {
+            String URL = "http://api.wolframalpha.com/v1/result?appid=A6QQ9U-79LAQWXLP8&i=What+is+pi%3F";
+            URL url = new URL(URL);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (Exception e)
+        {
         }
     }
 }
