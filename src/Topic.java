@@ -2,14 +2,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Topic
+class Topic
 {
     private String topic;
     private List<Question> questions = new ArrayList<Question>();
 
-    public Topic(String themenname)
+    public Topic(String topicname)
     {
-        topic = themenname;
+        topic = topicname;
     }
 
     public List<Question> getQuestions()
@@ -27,9 +27,9 @@ public class Topic
         return topic;
     }
 
-    public void setTopic(String thema)
+    public void setTopic(String pTopic)
     {
-        topic = thema;
+        topic = pTopic;
     }
 
     public void readQuestionFromFile(String filename) throws IOException

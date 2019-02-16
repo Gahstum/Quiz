@@ -3,7 +3,7 @@ import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.*;
 
-public class Quiz
+class Quiz
 {
 
     private Scanner scanner = new Scanner(System.in);
@@ -81,6 +81,13 @@ public class Quiz
         {
             addQuestion();
         }
+        System.out.println("Do you want to ask WolframAlpha a question?");
+        if (checkYesNo(scanner.nextLine()) == true)
+        {
+            System.out.println("Please enter your question");
+            String question = scanner.nextLine();
+            WolframAlpha(question);
+        }
         System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()) == true)
         {
@@ -142,18 +149,19 @@ public class Quiz
     //check if the Input was yes or no to start or end the quiz.
     private Boolean checkYesNo(String input)
     {
-        Boolean yes = false;
+        Boolean yes = null;
         if (input.equalsIgnoreCase("yes"))
         {
             yes = true;
         } else if (input.equalsIgnoreCase("no"))
         {
             yes = false;
-        } else
+        } else if (yes == null)
         {
             System.out.println("Type 'yes' or 'no'.");
             userAnswer = scanner.nextLine();
-            checkYesNo(userAnswer);
+            yes = checkYesNo(userAnswer);
+
         }
         return yes;
     }
@@ -238,22 +246,41 @@ public class Quiz
         }
     }
 
-    public void WolframAlpha() throws IOException
+    public void WolframAlpha(String userQuestion)
     {
-        // TODO parameter für string eingeben und den string dann mit + verbinden und in URL schreiben
+        String answer = null;
+        userQuestion = userQuestion.replace(' ', '+');
         try
         {
-            String URL = "http://api.wolframalpha.com/v1/result?appid=A6QQ9U-79LAQWXLP8&i=What+is+pi%3F";
+
+            String URL = "http://api.wolframalpha.com/v1/result?appid=A6QQ9U-79LAQWXLP8&i=";
+            URL = URL + userQuestion;
             URL url = new URL(URL);
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line;
-            while ((line = reader.readLine()) != null)
+            if ((answer = reader.readLine()) != null)
             {
-                System.out.println(line);
+                System.out.println(answer);
             }
             reader.close();
         } catch (Exception e)
         {
+            System.out.println("No answer found");
+        }
+        System.out.println("Should we save this answer and question?");
+        userAnswer = scanner.nextLine();
+        if (checkYesNo(userAnswer) == true)
+        {
+            try
+            {
+                FileWriter writer = new FileWriter(new File("./Topics" + "/" + "WolframAlpha-Questions.txt"), true);
+                writer.write(userQuestion + " # " + answer);
+                writer.close();
+
+            } catch (IOException e)
+            {
+                System.out.println("Error while trying to add a question");
+                e.printStackTrace();
+            }
         }
     }
 }
