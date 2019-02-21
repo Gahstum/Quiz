@@ -91,6 +91,9 @@ class Quiz
         System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()))
         {
+            // Um den alten Recap zu leeren
+            questionsRecap = "";
+            //TODO: komplett neue Fragen, es werden keine neue random geneniert, sondern die alten in der selben Reihenfolge abgefragt.
             startQuiz();
         } else
         {
