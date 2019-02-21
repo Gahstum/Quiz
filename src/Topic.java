@@ -37,15 +37,15 @@ class Topic
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
 
-        String zeile = "";
+        String line = "";
 
-        while((zeile = br.readLine()) != null )
+        while((line = br.readLine()) != null )
         {
             String question;
             String answer;
             //split questions and answers and add them into their fitting array
-            question = zeile.split("#")[0];
-            answer = zeile.split("#")[1];
+            question = line.split("#")[0];
+            answer = line.split("#")[1];
             questions.add(new Question(question,answer));
         }
 

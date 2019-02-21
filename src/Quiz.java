@@ -146,7 +146,7 @@ class Quiz
         }
     }
 
-    //check if the Input was yes or no to start or end the quiz.
+    //schaut ob die Eingabe yes oder no ist.
     private Boolean checkYesNo(String input)
     {
         Boolean yes = null;
