@@ -3,17 +3,6 @@ class Question
     private String question;
     private String answer;
     private String userAnswer;
-    private boolean correct = false;
-
-    public boolean isCorrect()
-    {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct)
-    {
-        this.correct = correct;
-    }
 
     public Question(String pQuestion, String pAnswer)
     {

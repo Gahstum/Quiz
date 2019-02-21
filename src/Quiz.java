@@ -12,7 +12,7 @@ class Quiz
     private List<Topic> topics = new ArrayList<Topic>();
     private String questionsRecap = "";
 
-    //Greetings and such formal stuff not the actual Quiz
+    //Vorlauf des Quiz mit Begruessung und Abfrage des Namens
     public void start() throws IOException
     {
 
@@ -22,7 +22,7 @@ class Quiz
         System.out.println("Nice to meet you " + userName + ". \n" +
                 "Do you want to participate in a Quiz?");
         userAnswer = scanner.nextLine();
-        if (checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer))
         {
             checkTopic();
         }
@@ -31,7 +31,7 @@ class Quiz
     // the actual Quiz
     private void startQuiz()
     {
-        //ask questions and stuff here
+        //genauere Abfragen wie das Quiz ablaufen soll
         int numberOfQuestions = 0;
         System.out.println("How many Questions do you want?");
         while (numberOfQuestions <= 0)
@@ -77,19 +77,19 @@ class Quiz
         }
         System.out.println(questionsRecap);
         System.out.println("Do you want to add a question?");
-        if (checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()))
         {
             addQuestion();
         }
         System.out.println("Do you want to ask WolframAlpha a question?");
-        if (checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()))
         {
             System.out.println("Please enter your question");
             String question = scanner.nextLine();
             WolframAlpha(question);
         }
         System.out.println("Do you want to do a Quiz again?");
-        if (checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()))
         {
             startQuiz();
         } else
@@ -98,14 +98,14 @@ class Quiz
         }
     }
 
-    //fügt ein oder alle Themen den Fragen hinzu
+    //fügt ein Thema oder alle Themen den Fragen hinzu
     private void checkTopic()
     {
 
         System.out.println("Do you want a specific topic?");
         System.out.println("Type 'yes' to continue or 'no' to  for all topics.");
         userAnswer = scanner.nextLine();
-        if (checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer))
         {
             System.out.printf("What Topic do you want: \n");
             for (Topic item : topics)
@@ -116,7 +116,7 @@ class Quiz
             userAnswer = userAnswer + "-Questions.txt";
             for (Topic item : topics)
             {
-                //fügt das bestimte Thema zu den Fragen hinzu
+                //fügt das bestimmte Thema zu den Fragen hinzu
                 if (userAnswer.equalsIgnoreCase(item.getTopic()))
                 {
                     questions.clear();
@@ -200,7 +200,7 @@ class Quiz
         }
         System.out.println("Do you want to add to the listed topics? ( Yes or no )");
         userAnswer = scanner.nextLine();
-        if (checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer))
         {
             System.out.println("Please enter the topic you would like to add to.");
             selectedTopic = scanner.nextLine() + "-Questions.txt";
@@ -216,12 +216,12 @@ class Quiz
 
         try
         {
-            if (!newTopic.isEmpty() == true)
+            if (!newTopic.isEmpty())
             {
                 FileWriter writer = new FileWriter(new File("./Topics" + "/" + newTopic), true);
                 writer.write(newQestion + " # " + newAnswer);
                 writer.close();
-            } else if (!selectedTopic.isEmpty() == true)
+            } else if (!selectedTopic.isEmpty())
             {
                 FileWriter writer = new FileWriter(new File("./Topics" + "/" + selectedTopic), true);
                 writer.write("\n" + newQestion + " # " + newAnswer);
@@ -233,7 +233,7 @@ class Quiz
             e.printStackTrace();
         }
         System.out.println("Do you want to add another question?");
-        if (checkYesNo(scanner.nextLine()) == true)
+        if (checkYesNo(scanner.nextLine()))
         {
             addQuestion();
         }
@@ -268,7 +268,7 @@ class Quiz
         }
         System.out.println("Should we save this answer and question?");
         userAnswer = scanner.nextLine();
-        if (checkYesNo(userAnswer) == true)
+        if (checkYesNo(userAnswer))
         {
             try
             {

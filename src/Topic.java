@@ -17,19 +17,10 @@ class Topic
         return questions;
     }
 
-    public void setQuestions(List<Question> questions)
-    {
-        this.questions = questions;
-    }
 
     public String getTopic()
     {
         return topic;
-    }
-
-    public void setTopic(String pTopic)
-    {
-        topic = pTopic;
     }
 
     public void readQuestionFromFile(String filename) throws IOException

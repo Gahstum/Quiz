@@ -1,5 +1,5 @@
 WWW is short for ? #World Wide Web
-Where is RAM located ? #Mother Board
+Where is RAM located ? #Motherboard
 If a computer has more than one processor then it is known as ? #Multiprocessor
 If a computer provides database services to others, then it will be known as ? #Database server
 Full form of URL is ? #Uniform Resource Locator
