@@ -8,10 +8,11 @@ class Quiz
 
     private Scanner scanner = new Scanner(System.in);
     private String userName, userAnswer;
-    private List<Question> questions = new ArrayList<Question>();
-    private List<Topic> topics = new ArrayList<Topic>();
+    private List<Question> questions = new ArrayList<>();
+    private List<Topic> topics = new ArrayList<>();
     private String questionsRecap = "";
-
+    private int right = 0;
+    private int wrong = 0;
     //Vorlauf des Quiz mit Begruessung und Abfrage des Namens
     public void start() throws IOException
     {
@@ -29,7 +30,7 @@ class Quiz
     }
 
     // the actual Quiz
-    private void startQuiz()
+    private void startQuiz() throws IOException
     {
         //genauere Abfragen wie das Quiz ablaufen soll
         int numberOfQuestions = 0;
@@ -66,16 +67,19 @@ class Quiz
             {
                 questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questionItem.getQuestion() + " and your answer: " + answerString + " was correct!" + "\n";
                 System.out.println("Right!");
+                right++;
             } else
             {
                 questionsRecap = questionsRecap + "The question " + (i + 1) + " was: " + questionItem.getQuestion() +
                         " and your answer: " + answerString + " was incorrect. The answer is " + questionItem.getAnswer() + "\n";
                 System.out.println("Wrong!");
+                wrong++;
             }
             i++;
 
         }
         System.out.println(questionsRecap);
+        saveStatistic();
         System.out.println("Do you want to add a question?");
         if (checkYesNo(scanner.nextLine()))
         {
@@ -88,12 +92,25 @@ class Quiz
             String question = scanner.nextLine();
             WolframAlpha(question);
         }
+        System.out.println("Do you want to see the statistic of all time Quiz questions?");
+        if (checkYesNo(scanner.nextLine()))
+        {
+            System.out.println("Questions asked: "+ (wrong+right));
+            System.out.println("Questions right: "+ right);
+            System.out.println("Questions wrong: "+ wrong);
+        }
         System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()))
         {
             // Um den alten Recap zu leeren
             questionsRecap = "";
-            //TODO: komplett neue Fragen, es werden keine neue random geneniert, sondern die alten in der selben Reihenfolge abgefragt.
+            try
+            {
+                filesFromDirectory();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
             startQuiz();
         } else
         {
@@ -102,7 +119,7 @@ class Quiz
     }
 
     //fügt ein Thema oder alle Themen den Fragen hinzu
-    private void checkTopic()
+    private void checkTopic() throws IOException
     {
 
         System.out.println("Do you want a specific topic?");
@@ -129,7 +146,7 @@ class Quiz
                     break;
                 }
             }
-        } else if (checkYesNo(userAnswer) == false)
+        } else if (!checkYesNo(userAnswer))
         {
             //fügt alle Themen zu den Fragen hinzu
             questions.clear();
@@ -152,14 +169,14 @@ class Quiz
     //schaut ob die Eingabe yes oder no ist.
     private Boolean checkYesNo(String input)
     {
-        Boolean yes = null;
+        Boolean yes;
         if (input.equalsIgnoreCase("yes"))
         {
             yes = true;
         } else if (input.equalsIgnoreCase("no"))
         {
             yes = false;
-        } else if (yes == null)
+        } else
         {
             System.out.println("Type 'yes' or 'no'.");
             userAnswer = scanner.nextLine();
@@ -207,7 +224,7 @@ class Quiz
         {
             System.out.println("Please enter the topic you would like to add to.");
             selectedTopic = scanner.nextLine() + "-Questions.txt";
-        } else if (checkYesNo(userAnswer) == false)
+        } else if (!checkYesNo(userAnswer))
         {
             System.out.println("Please enter a new topic name.");
             newTopic = scanner.nextLine() + "-Questions.txt";
@@ -249,7 +266,42 @@ class Quiz
         }
     }
 
-    public void WolframAlpha(String userQuestion)
+    private void saveStatistic() throws IOException
+    {
+        File stats = new File("./Topics" + "/" + "Statistic.txt");
+        if (stats.exists())
+        {
+            FileReader fr = new FileReader("./Topics" + "/" + "Statistic.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            while ((line = br.readLine()) != null)
+            {
+                String rightString;
+                String wrongString;
+                rightString = line.split("#")[0];
+                wrongString = line.split("#")[1];
+                right = right + Integer.parseInt(rightString);
+                wrong = wrong + Integer.parseInt(wrongString);
+            }
+            br.close();
+        }
+        try
+        {
+            FileWriter writer = new FileWriter(stats, false);
+            writer.write(right +"#");
+            writer.write(wrong+ "#");
+
+            writer.close();
+
+        } catch (IOException e)
+        {
+            System.out.println("Error while trying to add a question");
+            e.printStackTrace();
+        }
+    }
+
+    private void WolframAlpha(String userQuestion)
     {
         String answer = null;
         userQuestion = userQuestion.replace(' ', '+');
