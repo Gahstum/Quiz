@@ -159,7 +159,7 @@ class Quiz
         } else if (input.equalsIgnoreCase("no"))
         {
             yes = false;
-        } else if (yes == null)
+        } else
         {
             System.out.println("Type 'yes' or 'no'.");
             userAnswer = scanner.nextLine();
