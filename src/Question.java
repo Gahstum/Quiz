@@ -2,7 +2,6 @@ class Question
 {
     private String question;
     private String answer;
-    private String userAnswer;
 
     public Question(String pQuestion, String pAnswer)
     {
@@ -10,26 +9,9 @@ class Question
         answer = pAnswer;
     }
 
-
-    public String getUserAnswer()
-    {
-        return userAnswer;
-    }
-
-    public void setUserAnswer(String userAnswer)
-    {
-        this.userAnswer = userAnswer;
-    }
-
-
     public String getAnswer()
     {
         return answer;
-    }
-
-    public void setAnswer(String answer)
-    {
-        this.answer = answer;
     }
 
 
@@ -38,8 +20,4 @@ class Question
         return question;
     }
 
-    public void setQuestion(String question)
-    {
-        this.question = question;
-    }
 }
