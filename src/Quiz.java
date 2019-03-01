@@ -63,6 +63,7 @@ class Quiz
 
         System.out.println("Good luck and here comes your first question: ");
         int i = 0;
+        // richtige und falsche Antworten zusammen stellen
         for (Question questionItem : questions)
         {
             if (i == numberOfQuestions)
@@ -86,6 +87,7 @@ class Quiz
             i++;
 
         }
+        //gibt die Antworten zu den Fragen aus, mit richtig oder flasch.
         System.out.println(questionsRecap);
         saveStatistic();
         System.out.println("Do you want to add a question?");
@@ -110,7 +112,7 @@ class Quiz
         System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()))
         {
-            // Um den alten Recap zu leeren
+            // recap leeren, damit nicht erneut der Recap wiederholt wird, sobald das Quiz erneut abgeschlossen wurde.
             questionsRecap = "";
             try
             {
@@ -210,11 +212,13 @@ class Quiz
 
     }
 
+    // mischt die Fragen
     private void shuffleQuestions()
     {
         Collections.shuffle(questions);
     }
 
+    //fügt eine Frage zu einem Thema hinzu
     private void addQuestion()
     {
         String selectedTopic = "", newTopic = "", newQestion, newAnswer;
@@ -228,11 +232,12 @@ class Quiz
         }
         System.out.println("Do you want to add to the listed topics? ( Yes or no )");
         userAnswer = scanner.nextLine();
+        //isr ein existierendes Thema
         if (checkYesNo(userAnswer))
         {
             System.out.println("Please enter the topic you would like to add to.");
             selectedTopic = scanner.nextLine() + "-Questions.txt";
-        } else if (!checkYesNo(userAnswer))
+        } else if (!checkYesNo(userAnswer)) //ist ein neues Themenfeld
         {
             System.out.println("Please enter a new topic name.");
             newTopic = scanner.nextLine() + "-Questions.txt";
