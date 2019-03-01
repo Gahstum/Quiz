@@ -34,7 +34,6 @@ class Topic
         {
             String question;
             String answer;
-            //split questions and answers and add them into their fitting array
             question = line.split("#")[0];
             answer = line.split("#")[1];
             questions.add(new Question(question,answer));
