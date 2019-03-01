@@ -20,12 +20,20 @@ class Quiz
         filesFromDirectory();
         System.out.println("Hello what is your name?");
         userName = scanner.nextLine();
+        if ( userName.isEmpty())
+        {
+            userName = "Anonymus";
+        }
         System.out.println("Nice to meet you " + userName + ". \n" +
                 "Do you want to participate in a Quiz?");
         userAnswer = scanner.nextLine();
         if (checkYesNo(userAnswer))
         {
             checkTopic();
+        }
+        else
+        {
+            System.out.println("Goodbye " + userName);
         }
     }
 
