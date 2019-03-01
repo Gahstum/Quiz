@@ -7,9 +7,9 @@ class Topic
     private String topic;
     private List<Question> questions = new ArrayList<Question>();
 
-    public Topic(String topicname)
+    public Topic(String topicName)
     {
-        topic = topicname;
+        topic = topicName;
     }
 
     public List<Question> getQuestions()

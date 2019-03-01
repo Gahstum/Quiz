@@ -77,7 +77,7 @@ class Quiz
             i++;
 
         }
-        // gibt aus, welche Frage nrichtig und falsch beantwortet wurden.
+        // gibt aus, welche Frage richtig und falsch beantwortet wurden.
         System.out.println(questionsRecap);
         saveStatistic();
         System.out.println("Do you want to do a Quiz again?");
@@ -296,7 +296,7 @@ class Quiz
         System.out.println("Please type a number to choose");
         try
         {
-            nextInt = Integer.parseInt(scanner.next());
+            nextInt = Integer.parseInt(scanner.nextLine());
         } catch (Exception e)
         {
             System.out.println("Please enter a number!");
@@ -338,7 +338,6 @@ class Quiz
         userQuestion = userQuestion.replace(' ', '+');
         try
         {
-
             String URL = "http://api.wolframalpha.com/v1/result?appid=A6QQ9U-79LAQWXLP8&i=";
             URL = URL + userQuestion;
             URL url = new URL(URL);
