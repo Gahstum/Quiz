@@ -17,10 +17,13 @@ class Quiz
     //Vorlauf des Quiz mit Begruessung und Abfrage des Namens
     public void start() throws IOException
     {
-
         filesFromDirectory();
         System.out.println("Hello what is your name?");
         userName = scanner.nextLine();
+        if ( userName.isEmpty())
+        {
+            userName = "Anonymus";
+        }
         System.out.println("Nice to meet you " + userName + ". \n");
         MainMenu();
     }
