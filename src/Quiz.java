@@ -13,6 +13,7 @@ class Quiz
     private String questionsRecap = "";
     private int right = 0;
     private int wrong = 0;
+
     //Vorlauf des Quiz mit Begruessung und Abfrage des Namens
     public void start() throws IOException
     {
@@ -20,13 +21,8 @@ class Quiz
         filesFromDirectory();
         System.out.println("Hello what is your name?");
         userName = scanner.nextLine();
-        System.out.println("Nice to meet you " + userName + ". \n" +
-                "Do you want to participate in a Quiz?");
-        userAnswer = scanner.nextLine();
-        if (checkYesNo(userAnswer))
-        {
-            checkTopic();
-        }
+        System.out.println("Nice to meet you " + userName + ". \n");
+        MainMenu();
     }
 
     // the actual Quiz
@@ -80,25 +76,6 @@ class Quiz
         }
         System.out.println(questionsRecap);
         saveStatistic();
-        System.out.println("Do you want to add a question?");
-        if (checkYesNo(scanner.nextLine()))
-        {
-            addQuestion();
-        }
-        System.out.println("Do you want to ask WolframAlpha a question?");
-        if (checkYesNo(scanner.nextLine()))
-        {
-            System.out.println("Please enter your question");
-            String question = scanner.nextLine();
-            WolframAlpha(question);
-        }
-        System.out.println("Do you want to see the statistic of all time Quiz questions?");
-        if (checkYesNo(scanner.nextLine()))
-        {
-            System.out.println("Questions asked: "+ (wrong+right));
-            System.out.println("Questions right: "+ right);
-            System.out.println("Questions wrong: "+ wrong);
-        }
         System.out.println("Do you want to do a Quiz again?");
         if (checkYesNo(scanner.nextLine()))
         {
@@ -114,7 +91,7 @@ class Quiz
             startQuiz();
         } else
         {
-            System.out.println("Goodbye " + userName);
+            MainMenu();
         }
     }
 
@@ -289,8 +266,8 @@ class Quiz
         try
         {
             FileWriter writer = new FileWriter(stats, false);
-            writer.write(right +"#");
-            writer.write(wrong+ "#");
+            writer.write(right + "#");
+            writer.write(wrong + "#");
 
             writer.close();
 
@@ -299,6 +276,54 @@ class Quiz
             System.out.println("Error while trying to add a question");
             e.printStackTrace();
         }
+    }
+
+    private void MainMenu() throws IOException
+    {
+        int nextInt = 0;
+        System.out.println("What do you wanna do?");
+        System.out.println("1. Quiz");
+        System.out.println("2. Add questions");
+        System.out.println("3. Ask Wolframalpha");
+        System.out.println("4. Look at Statistics");
+        System.out.println("5. Exit");
+        System.out.println("Please type a number to choose");
+        try
+        {
+            nextInt = Integer.parseInt(scanner.next());
+        } catch (Exception e)
+        {
+            System.out.println("Please enter a number!");
+            MainMenu();
+        }
+        if (nextInt == 1)
+        {
+            checkTopic();
+            MainMenu();
+        }
+        if (nextInt == 2)
+        {
+            addQuestion();
+            MainMenu();
+        }
+        if (nextInt == 3)
+        {
+            System.out.println("Please enter your question");
+            String question = scanner.nextLine();
+            WolframAlpha(question);
+            MainMenu();
+        }
+        if (nextInt == 4)
+        {
+            System.out.println("Questions asked: " + (wrong + right));
+            System.out.println("Questions right: " + right);
+            System.out.println("Questions wrong: " + wrong);
+            MainMenu();
+        } else
+        {
+            System.out.println("Goodbye "+userName);
+        }
+
     }
 
     private void WolframAlpha(String userQuestion)
