@@ -28,7 +28,7 @@ class Quiz
         MainMenu();
     }
 
-    // the actual Quiz
+    // das eigentliche Quiz
     private void startQuiz() throws IOException
     {
         //genauere Abfragen wie das Quiz ablaufen soll
@@ -77,6 +77,7 @@ class Quiz
             i++;
 
         }
+        // gibt aus, welche Frage nrichtig und falsch beantwortet wurden.
         System.out.println(questionsRecap);
         saveStatistic();
         System.out.println("Do you want to do a Quiz again?");
@@ -182,11 +183,13 @@ class Quiz
 
     }
 
+    // mischt die Fragen
     private void shuffleQuestions()
     {
         Collections.shuffle(questions);
     }
 
+    // fügt eine Frage zu einem bestehendem oder neuen Thema hinzu
     private void addQuestion()
     {
         String selectedTopic = "", newTopic = "", newQestion, newAnswer;
