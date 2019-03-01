@@ -5,7 +5,7 @@ import java.util.List;
 class Topic
 {
     private String topic;
-    private List<Question> questions = new ArrayList<Question>();
+    private List<Question> questions = new ArrayList<>();
 
     public Topic(String topicName)
     {

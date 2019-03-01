@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.*;
 
 class Quiz
